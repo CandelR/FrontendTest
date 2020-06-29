@@ -1,0 +1,136 @@
+﻿<Window x:Class="TradingFrontendTest.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TradingFrontendTest" 
+        xmlns:ViewModel="clr-namespace:TradingFrontendTest.ViewModel"
+        xmlns:Utils="clr-namespace:TradingFrontendTest.Utils" 
+        mc:Ignorable="d"
+        Title="App" Height="600" Width="800" Background="#FF022026">
+    <!--<Window.DataContext>
+        <ViewModel:MainWindowViewModel/>
+    </Window.DataContext>-->
+    <Window.Resources>
+        <Utils:ValueColorSelector x:Key="ColorSelector">
+        </Utils:ValueColorSelector>
+    </Window.Resources>
+    
+    <Grid>
+     
+        <TabControl Grid.ColumnSpan="3" Background="#FF49C6E5" SelectionChanged="TabControl_SelectionChanged">
+            <TabItem Name="tabItem1" Background="#FF022026" Header="Tab1" Foreground="#FF808C84" >
+                <StackPanel Background="#FF022026">
+                    <DataGrid x:Name="dg1" AutoGenerateColumns="False"  Margin="30,10,112,0" 
+                              Height="200" VerticalAlignment="Top" 
+                              MinColumnWidth="80" 
+                              HeadersVisibility="Column" HorizontalContentAlignment="Center" UseLayoutRounding="False" HorizontalAlignment="Left" Background="#FF022026" SelectionChanged="dg1_SelectionChanged" 
+                              >
+   
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Name" Binding="{Binding Name}" MinWidth="120"/>
+                            <DataGridTextColumn Header="{Binding Months[0]}" Binding="{Binding BaseValues[0]}">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="Foreground"
+                                                Value="{Binding BaseValues[0], Converter={StaticResource ColorSelector}}" />
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+                            
+                            <DataGridTextColumn Header="{Binding Months[1]}" Binding="{Binding BaseValues[1]}">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="Foreground"
+                                                Value="{Binding BaseValues[1], Converter={StaticResource ColorSelector}}" />
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+
+                            <DataGridTextColumn Header="{Binding Months[2]}" Binding="{Binding BaseValues[2]}">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="Foreground"
+                                                Value="{Binding BaseValues[2], Converter={StaticResource ColorSelector}}" />
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+                            
+                            <DataGridTextColumn Header="{Binding Months[3]}" Binding="{Binding BaseValues[3]}">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="Foreground"
+                                                Value="{Binding BaseValues[3], Converter={StaticResource ColorSelector}}" />
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+                            
+                            <DataGridTextColumn Header="{Binding Months[4]}" Binding="{Binding BaseValues[4]}">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="Foreground"
+                                                Value="{Binding BaseValues[4], Converter={StaticResource ColorSelector}}" />
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+                            
+                            <DataGridTextColumn Header="{Binding Months[5]}" Binding="{Binding BaseValues[5]}">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="Foreground"
+                                                Value="{Binding BaseValues[5], Converter={StaticResource ColorSelector}}" />
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Button Height="40" Content="Add Product" Click="Button_Click" 
+                            RenderTransformOrigin="-3.75,0.4" Margin="30,0,0,0" HorizontalAlignment="Left" Width="261" Background="#FF48CAD9" BorderBrush="#FF49C6E5" />
+
+                    <DataGrid x:Name="dg2" ItemsSource="{Binding Products}"  Margin="30,10,0,0"  MinColumnWidth="80" 
+                              Height="200" VerticalAlignment="Top"   HorizontalAlignment="Left" Width="726" Background="#FF022026" >
+                        <DataGrid.GroupStyle>
+                            <GroupStyle>
+                                <GroupStyle.HeaderTemplate>
+                                    <DataTemplate>
+                                        <StackPanel>
+                                            <TextBlock Text="{Binding Name}" Foreground="White" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </GroupStyle.HeaderTemplate>
+
+                                <GroupStyle.ContainerStyle>
+                                    <Style TargetType="{x:Type GroupItem}">
+                                        <Setter Property="Foreground" Value="White"/>
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type GroupItem}">
+                                                    <Expander  Background="#FF022026" Foreground="White" >
+                                                        <Expander.Header>
+                                                            <StackPanel Orientation="Horizontal">
+                                                                <TextBlock Text="{Binding Name}" />
+                                                                <TextBlock Text="-" Margin="8,0,4,0" />
+                                                                <TextBlock Text="{Binding ItemCount}" Margin="8,0,4,0" />
+                                                                <TextBlock Text="Product(s)"/>
+                                                            </StackPanel>
+                                                        </Expander.Header>
+                                                        <ItemsPresenter />
+                                                    </Expander>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </GroupStyle.ContainerStyle>
+                            </GroupStyle>
+                        </DataGrid.GroupStyle>
+                    </DataGrid>
+                </StackPanel>
+
+
+            </TabItem>
+            <TabItem Name="tabItem2" Header="Tab2" Background="#FF022026" Foreground="#FF808C84"/>
+        </TabControl>
+    </Grid>
+
+</Window>
